@@ -1,0 +1,88 @@
+
+\documentclass[12pt]{article}
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{listings}
+
+\title{Project Report: Java RMI Chat Application}
+\author{Narta Matteo}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+This project implements a distributed chat application using Java RMI (Remote Method Invocation). 
+The system allows multiple clients to connect to a central server, exchange messages, and maintain 
+a shared chat history. The architecture follows a client-server model where remote objects are 
+used to enable communication between distributed components.
+
+\section{System Architecture}
+
+The application is divided into the following main components:
+
+\begin{itemize}
+    \item \textbf{Chat Interface (Chat.java)}: Defines the remote methods that clients can invoke on the server. 
+    These include joining the chat, leaving, writing messages, reading messages, and saving the chat history.
+    
+    \item \textbf{Chat Implementation (ChatImpl.java)}: Implements the remote interface and extends 
+    \texttt{UnicastRemoteObject}. It manages connected users, message history, synchronization, 
+    and persistence of chat data.
+    
+    \item \textbf{Server (Server.java)}: Starts the RMI registry and binds the chat service under 
+    a specific name (e.g., ``chatServer''). This allows clients to look up and access the remote object.
+    
+    \item \textbf{Client and GUI (Client.java, ClientGUI.java)}: The client connects to the RMI registry, 
+    retrieves the remote chat object, and interacts with it. The graphical interface provides 
+    user-friendly interaction for sending and receiving messages.
+    
+    \item \textbf{ChatClient Interface and Implementation}: Allows the server to call back clients 
+    (callback mechanism), enabling real-time message updates.
+\end{itemize}
+
+\section{Main Functionalities}
+
+\subsection{User Management}
+
+Users can join and leave the chat using the \texttt{join()} and \texttt{leave()} methods. 
+The server maintains a \texttt{HashMap} of connected participants, mapping usernames 
+to their corresponding remote client objects.
+
+\subsection{Messaging}
+
+When a user sends a message using \texttt{write()}, the server stores it in a shared 
+message history (a \texttt{List<String>}). Clients can retrieve messages using the 
+\texttt{read()} method. The callback mechanism allows the server to notify clients 
+when new messages are available.
+
+\subsection{Concurrency Control}
+
+Since multiple clients may access the server simultaneously, synchronization mechanisms 
+are used. A \texttt{ReentrantLock} ensures thread-safe access to shared resources such 
+as the participants list and message history.
+
+\subsection{Persistence}
+
+The chat history is saved to a file, allowing messages to be restored when the server 
+restarts. This ensures that previous conversations are not lost.
+
+\section{Technologies Used}
+
+\begin{itemize}
+    \item Java RMI for distributed communication
+    \item Java Collections Framework (HashMap, ArrayList)
+    \item Concurrency utilities (ReentrantLock)
+    \item Java Swing for graphical user interface
+\end{itemize}
+
+\section{Conclusion}
+
+This project demonstrates the implementation of a distributed system using Java RMI. 
+It covers key distributed system concepts such as remote interfaces, object binding 
+in a registry, client-server communication, synchronization, and persistence. 
+The use of callbacks enhances real-time interaction, making the chat application 
+efficient and responsive.
+
+\end{document}
