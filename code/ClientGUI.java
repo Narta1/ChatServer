@@ -1,4 +1,3 @@
-package Project1;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -94,16 +93,15 @@ public class ClientGUI {
     }
     
     public static void main(String[] args) {
-        if (args.length < 2) {
-            System.out.println("Usage: java ClientGUI <host> <username>");
+        if (args.length != 1) {
+            System.out.println("Usage: java ClientGUI <username>");
             return;
         }
         
-        String host = args[0];
-        String username = args[1];
+        String username = args[0];
         
         SwingUtilities.invokeLater(() -> {
-            new ClientGUI(host, username);
+            new ClientGUI("localhost", username);
         });
     }
 }

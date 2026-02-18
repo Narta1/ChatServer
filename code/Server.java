@@ -1,5 +1,3 @@
-package Project1;
-
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
@@ -10,9 +8,10 @@ public class Server {
         try {
             ChatImpl chat_stub=new ChatImpl();
             //Chat chat_stub=(Chat) UnicastRemoteObject.exportObject(chat, 0);
-            Registry register=LocateRegistry.getRegistry();
-            register.bind("chatServer", chat_stub);
-            
+            // We load the registry 
+            Registry registry = LocateRegistry.createRegistry(1099);
+            registry.rebind("chatServer", chat_stub);
+
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 System.out.println("\nShutting down server...");
                 try {

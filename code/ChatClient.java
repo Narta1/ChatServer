@@ -1,4 +1,3 @@
-package Project1;
 import java.rmi.RemoteException;
 import java.rmi.Remote;
 

@@ -1,5 +1,3 @@
-package Project1;
-
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import javax.swing.SwingUtilities;

@@ -1,4 +1,3 @@
-package Project1;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 public class ChatClientImpl extends UnicastRemoteObject implements ChatClient{
