@@ -8,16 +8,17 @@ import java.rmi.server.UnicastRemoteObject;
 public class Client {
     public static void main(String[] args) {
         try {
-            if (args.length != 1) {
-                System.out.println("Usage: java Client <username>");
+            if (args.length != 2) {
+                System.out.println("Usage: java Client <host> <username>");
                 return;
             }
  
 
-            String username=args[0];
+            String host=args[0];
+            String username=args[1];
 
             // We load the remote registry
-            Registry registry = LocateRegistry.getRegistry("localhost", 1099);
+            Registry registry = LocateRegistry.getRegistry(host, 1099);
             Chat server_stub = (Chat) registry.lookup("chatServer");
 
             ChatClientImpl c_stub=new ChatClientImpl(username);

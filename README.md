@@ -1,10 +1,10 @@
 # Dossiers 
-La doc est dans le dossier doc le code dans le dossier code
+The report is in the directory doc
+The code in in the directory doc
 
 # Compilation
 javac *.java
 
- - java ChatServer 
+ - java Server 
  - java ChatClient username
  - java ChatClient username
-
