@@ -19,7 +19,7 @@ public class ChatImpl extends UnicastRemoteObject implements Chat {
     public ChatImpl () throws RemoteException{
         participants=new HashMap<>();
         history=new ArrayList<>();
-        loead_Chat();
+        load_Chat();
     }   
     public synchronized void join (String name,ChatClient client) throws RemoteException{
         participants.put(name,client);
@@ -48,14 +48,10 @@ public class ChatImpl extends UnicastRemoteObject implements Chat {
     };
     
 
-    public List<String> read(String name) throws RemoteException {
-        lock.lock();
-        try {
-            return new ArrayList<>(history);
-        } finally {
-            lock.unlock();
-        }
+    public synchronized List<String> read(String name) throws RemoteException{
+        return new ArrayList<>(history);
     }
+
     public void save_Chat() throws RemoteException {  
         try {
             FileWriter writer = new FileWriter("chat_history.txt");
@@ -69,7 +65,7 @@ public class ChatImpl extends UnicastRemoteObject implements Chat {
             System.out.println("Saving to a text file failed");
         }
     }
-    public void loead_Chat() throws RemoteException{
+    public void load_Chat() throws RemoteException{
         try {
             File file = new File("chat_history.txt");
             

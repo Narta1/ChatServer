@@ -23,9 +23,6 @@ public class Server {
             }));
 
             System.out.println ("Server ready");
-
-
-
         } catch (Exception e) {
             System.err.println("Error on server :" + e) ;
             e.printStackTrace();

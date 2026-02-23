@@ -10,7 +10,7 @@ public interface Chat extends Remote {
     public void write (String name,String message) throws RemoteException;
     public List<String> read (String name) throws RemoteException;
     public void save_Chat() throws RemoteException;
-    public void loead_Chat() throws RemoteException;
+    public void load_Chat() throws RemoteException;
 
     
 }
